@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace dotnetcoreapi {
@@ -9,7 +10,16 @@ namespace dotnetcoreapi {
                     builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
-            });        
+            });
+
+        public static void ConfigureIISIntegration(this IServiceCollection services) =>
+           services.Configure<IISOptions>(options =>
+           {
+               // default settings
+               options.AutomaticAuthentication = true;
+               options.AuthenticationDisplayName = null;
+               options.ForwardClientCertificate = true;
+           });
     }
     
 }
