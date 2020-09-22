@@ -1,3 +1,4 @@
+using dotnetcoreapi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,6 +21,9 @@ namespace dotnetcoreapi {
                options.AuthenticationDisplayName = null;
                options.ForwardClientCertificate = true;
            });
+
+        public static void ConfigureLoggerService(this IServiceCollection services) =>
+            services.AddScoped<ILoggerManager, LoggerManager>();
     }
     
 }
